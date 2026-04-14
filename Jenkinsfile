@@ -37,5 +37,10 @@ pipeline {
                 s3Upload acl: 'Private', bucket: 'kubebytes-amazone-s3-bucket', file: '/var/lib/jenkins/workspace/declarative-pipeline-job1/target/addressbook.war'
             }
         }
+        stage('Deploy code to tomcat') {
+            steps {
+                sh 'sudo cp /var/lib/jenkins/workspace/declarative-pipeline-job1/target/*.war /home/ubuntu/tomcat/webapps/'
+            }
+        }
     }
 }
