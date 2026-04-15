@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -7,36 +8,45 @@ pipeline {
                 git 'https://github.com/skbehera24/addressbook-v1.git'
             }
         }
-          stage('compilitation the code') {
+
+        stage('compile code') {
             steps {
-                sh 'mvn compile'
+                sh 'mvn clean compile'
             }
         }
-         stage('code review') {
+
+        stage('code review') {
             steps {
                 sh 'mvn pmd:pmd'
             }
         }
-         stage('Unit test') {
+
+        stage('unit test') {
             steps {
                 sh 'mvn test'
             }
         }
+
         stage('package') {
             steps {
                 sh 'mvn package'
             }
         }
-         stage('Code coverage') {
+
+        stage('code coverage') {
             steps {
                 sh 'mvn verify'
             }
         }
+
         stage('s3 bucket storing') {
             steps {
-              s3Upload acl: 'Private', bucket: 'sumit-bucket-name', cacheControl: '', file: '/var/lib/jenkins/workspace/declarative-pipeline-job1/target/addressbook.war', text: 'jenkins-s3-artifact-store-project'
+                s3Upload(
+                    bucket: 'jenkins-s3-artifact-store-project',
+                    file: 'target/addressbook.war',
+                    acl: 'Private'
+                )
             }
         }
-         
     }
 }
