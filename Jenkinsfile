@@ -48,7 +48,7 @@ pipeline {
                 )
             }
         }
-          stage('Deploy code to tomcat') {
+          stage('Deploy code to tomcat-server') {
     steps {
         sh 'cp /var/lib/jenkins/workspace/declarative-pipeline-job-1/target/*.war /home/ubuntu/tomcat/webapps/'
           }
