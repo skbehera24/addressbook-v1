@@ -7,6 +7,16 @@ pipeline {
                 git 'https://github.com/skbehera24/addressbook-v1.git'
             }
         }
+          stage('compilitation the code') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+         stage('code review') {
+            steps {
+                sh 'mvn pmd:pmd'
+            }
+        }
          
     }
 }
