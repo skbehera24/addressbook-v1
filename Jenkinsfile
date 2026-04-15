@@ -34,7 +34,7 @@ pipeline {
         }
         stage('s3 bucket storing') {
             steps {
-              s3Upload acl: 'Private', bucket: 'sumit-bucket-name', cacheControl: '', file: 'target/*.war', text: 'jenkins-s3-artifact-store-project'
+              s3Upload acl: 'Private', bucket: 'sumit-bucket-name', cacheControl: '', file: '/var/lib/jenkins/workspace/declarative-pipeline-job1/target/addressbook.war', text: 'jenkins-s3-artifact-store-project'
             }
         }
          
